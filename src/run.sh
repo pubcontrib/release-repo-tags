@@ -96,10 +96,10 @@ debug()
 }
 
 printf 'Checking for any new releases...\n'
-printf 'Tags updated as of %s.\n' "$(date)"
+printf 'Tags updated as of %s.\n' `date`
 
 cd "$repo_path"
-tags="$(sync_repo)"
+tags=`sync_repo`
 
 for tag in $tags
 do
@@ -113,7 +113,7 @@ do
         debug 'Skipping...'
     else
         checkout_tag "$tag"
-        commit="$(current_commit)"
+        commit=`current_commit`
         build "$release_path" "$commit"
         cleanup_branch
         release_count=$((release_count + 1))
