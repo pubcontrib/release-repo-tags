@@ -15,19 +15,19 @@ then
     exit 1
 fi
 
-syncRepo()
+sync_repo()
 {
     git fetch -ap > /dev/null 2>&1
     git pull > /dev/null 2>&1
     git tag -l --sort=v:refname
 }
 
-currentCommit()
+current_commit()
 {
     git rev-parse HEAD
 }
 
-checkoutTag()
+checkout_tag()
 {
     tag=$1
 
@@ -79,7 +79,7 @@ build()
     printf '%s\n' "$ccversion" > "$release_path/ccversion.txt"
 }
 
-cleanupBranch()
+cleanup_branch()
 {
     git checkout master > /dev/null 2>&1
     git branch -d testing > /dev/null 2>&1
@@ -99,7 +99,7 @@ printf 'Checking for any new releases...\n'
 printf 'Tags updated as of %s.\n' "$(date)"
 
 cd "$repo_path"
-tags="$(syncRepo)"
+tags="$(sync_repo)"
 
 for tag in $tags
 do
@@ -112,10 +112,10 @@ do
     then
         debug "Skipping..."
     else
-        checkoutTag "$tag"
-        commit="$(currentCommit)"
+        checkout_tag "$tag"
+        commit="$(current_commit)"
         build "$release_path" "$commit"
-        cleanupBranch
+        cleanup_branch
         release_count=$((release_count+1))
 
         debug "Done"
