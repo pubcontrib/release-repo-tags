@@ -101,13 +101,13 @@ printf 'Tags updated as of %s.\n' "$now"
 
 cd "$repo_path"
 tags=`sync_repo`
+release_count=0
 
 for tag in $tags
 do
     debug "$tag"
 
     release_path="$releases_path/$tag"
-    release_count=0
 
     if [ -d "$release_path" ]
     then
