@@ -116,7 +116,7 @@ do
         commit="$(current_commit)"
         build "$release_path" "$commit"
         cleanup_branch
-        release_count=$((release_count+1))
+        release_count=$((release_count + 1))
 
         debug "Done"
     fi
