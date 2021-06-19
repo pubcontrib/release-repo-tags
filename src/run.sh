@@ -5,13 +5,13 @@ verbose=$3
 
 if [ -z "$repo_path" ]
 then
-    printf "[ERROR] No repo path given.\n"
+    printf '[ERROR] No repo path given.\n'
     exit 1
 fi
 
 if [ -z "$releases_path" ]
 then
-    printf "[ERROR] No releases path given.\n"
+    printf '[ERROR] No releases path given.\n'
     exit 1
 fi
 
@@ -47,7 +47,7 @@ build()
     make_path="$release_path/make"
     mkdir "$make_path"
     make CC="$cc" > "$make_path/stdout.txt" 2>"$make_path/stderr.txt"
-    printf "%d\n" $? > "$make_path/exitcode.txt"
+    printf '%d\n' $? > "$make_path/exitcode.txt"
 
     # Create a binary archive
     tar -czf "$release_path/binary.tar.gz" AUTHORS LICENSE README.md bin
@@ -59,24 +59,24 @@ build()
     check_path="$release_path/check"
     mkdir "$check_path"
     make check > "$check_path/stdout.txt" 2>"$check_path/stderr.txt"
-    printf "%d\n" $? > "$check_path/exitcode.txt"
+    printf '%d\n' $? > "$check_path/exitcode.txt"
 
     # Clean the release
     clean_path="$release_path/clean"
     mkdir "$clean_path"
     make clean > "$clean_path/stdout.txt" 2>"$clean_path/stderr.txt"
-    printf "%d\n" $? > "$clean_path/exitcode.txt"
+    printf '%d\n' $? > "$clean_path/exitcode.txt"
 
     # Save artifacts of the build
-    printf "%s\n" "$commit" > "$release_path/commit.txt"
+    printf '%s\n' "$commit" > "$release_path/commit.txt"
     uname=`uname --all`
-    printf "%s\n" "$uname" > "$release_path/uname.txt"
+    printf '%s\n' "$uname" > "$release_path/uname.txt"
     sha256sum=`sha256sum $release_path/binary.tar.gz $release_path/source.tar.gz`
-    printf "%s\n" "$sha256sum" > "$release_path/sha256sum.txt"
+    printf '%s\n' "$sha256sum" > "$release_path/sha256sum.txt"
     date=`date --utc --iso-8601=seconds`
-    printf "%s\n" "$date" > "$release_path/date.txt"
+    printf '%s\n' "$date" > "$release_path/date.txt"
     ccversion=`$cc --version`
-    printf "%s\n" "$ccversion" > "$release_path/ccversion.txt"
+    printf '%s\n' "$ccversion" > "$release_path/ccversion.txt"
 }
 
 cleanupBranch()
@@ -91,12 +91,12 @@ debug()
 
     if [ ! -z "$verbose" ]
     then
-        printf "%s\n" "$message"
+        printf '%s\n' "$message"
     fi
 }
 
-printf "Checking for any new releases...\n"
-printf "Tags updated as of %s.\n" "$(date)"
+printf 'Checking for any new releases...\n'
+printf 'Tags updated as of %s.\n' "$(date)"
 
 cd "$repo_path"
 tags="$(syncRepo)"
@@ -123,4 +123,4 @@ do
 
 done
 
-printf "Released %d versions.\n" $release_count
+printf 'Released %d versions.\n' $release_count
