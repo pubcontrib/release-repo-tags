@@ -110,7 +110,7 @@ do
 
     if [ -d "$release_path" ]
     then
-        debug "Skipping..."
+        debug 'Skipping...'
     else
         checkout_tag "$tag"
         commit="$(current_commit)"
@@ -118,7 +118,7 @@ do
         cleanup_branch
         release_count=$((release_count + 1))
 
-        debug "Done"
+        debug 'Done'
     fi
 
 done
