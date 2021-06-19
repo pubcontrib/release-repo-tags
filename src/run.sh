@@ -96,7 +96,8 @@ debug()
 }
 
 printf 'Checking for any new releases...\n'
-printf 'Tags updated as of %s.\n' `date`
+now=`date`
+printf 'Tags updated as of %s.\n' "$now"
 
 cd "$repo_path"
 tags=`sync_repo`
