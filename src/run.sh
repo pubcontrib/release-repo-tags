@@ -5,13 +5,13 @@ verbose=$3
 
 if [ -z "$repo_path" ]
 then
-    printf '[ERROR] No repo path given.\n'
+    printf '[ERROR] No repo path given.\n' 1>&2
     exit 1
 fi
 
 if [ -z "$releases_path" ]
 then
-    printf '[ERROR] No releases path given.\n'
+    printf '[ERROR] No releases path given.\n' 1>&2
     exit 1
 fi
 
